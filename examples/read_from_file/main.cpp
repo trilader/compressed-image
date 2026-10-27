@@ -26,7 +26,7 @@ auto main() -> int
 	for (auto [chunk_r, chunk_g, chunk_b] : compressed::ranges::zip(r, g, b))
 	{
 		auto chunk_gen = compressed::ranges::zip(chunk_r, chunk_g, chunk_b);
-		std::for_each(std::execution::par_unseq, chunk_gen.begin(), chunk_gen.end(), [](auto pixels)
+		std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ chunk_gen.begin(), chunk_gen.end(), [](auto pixels)
 			{
 				auto& [r_pixel, g_pixel, b_pixel] = pixels;
 				r_pixel = 12;

@@ -24,7 +24,7 @@ auto main() -> int
         path, // image path
         []([[maybe_unused]] size_t channel_idx, std::span<float> chunk)
         {
-            std::for_each(std::execution::par_unseq, chunk.begin(), chunk.end(), [](float& pixel)
+            std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ chunk.begin(), chunk.end(), [](float& pixel)
             {
                 pixel = std::pow(pixel, static_cast<float>(1.0f / 2.2f));
             });

@@ -126,7 +126,7 @@ void bench_image_iteration_normal(benchmark::State& state, const std::filesystem
 		{
 			for (auto& channel : channels)
 			{
-				std::for_each(std::execution::par_unseq, channel.begin(), channel.end(), [](auto& pixel)
+				std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ channel.begin(), channel.end(), [](auto& pixel)
 					{
 						pixel = static_cast<T>(25);
 					});
@@ -146,7 +146,7 @@ void bench_image_iteration_compressed(benchmark::State& state, const std::filesy
 			{
 				for (auto chunk_span : channel)
 				{
-					std::for_each(std::execution::par_unseq, chunk_span.begin(), chunk_span.end(), [](auto& pixel)
+					std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ chunk_span.begin(), chunk_span.end(), [](auto& pixel)
 						{
 							pixel = static_cast<T>(25);
 						});
@@ -167,7 +167,7 @@ void bench_image_iteration_compressed_zip(benchmark::State& state, const std::fi
 			for (auto [chunk_r, chunk_g, chunk_b] : compressed::ranges::zip(channel_r, channel_g, channel_b))
 			{
 				auto gen = compressed::ranges::zip(chunk_r, chunk_g, chunk_b);
-				std::for_each(std::execution::par_unseq, gen.begin(), gen.end(), [](auto pixels)
+				std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ gen.begin(), gen.end(), [](auto pixels)
 					{
 						auto& [r, g, b] = pixels;
 						r = static_cast<T>(25);
@@ -190,7 +190,7 @@ void bench_image_iteration_compressed_get_decompressed(benchmark::State& state, 
 			auto data = image.get_decompressed();
 			for (auto& channel : data)
 			{
-				std::for_each(std::execution::par_unseq, channel.begin(), channel.end(), [](auto& pixel)
+				std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ channel.begin(), channel.end(), [](auto& pixel)
 					{
 						pixel = static_cast<T>(25);
 					});

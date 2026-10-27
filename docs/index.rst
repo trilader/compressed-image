@@ -82,7 +82,7 @@ with the channels. For more detailed examples have a look at the :ref:`examples`
 		// Iterate over the chunks in the channel, this will decompress the chunk and recompress it on the fly.
 		for (auto chunk_r : channel_r)
 		{
-			std::for_each(std::execution::par_unseq, chunk_r.begin(), chunk_r.end(), [](auto& pixel)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ chunk_r.begin(), chunk_r.end(), [](auto& pixel)
 			{
 				// perform some computation on the chunk in parallel
 			});

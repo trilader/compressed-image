@@ -100,7 +100,7 @@ point.
 				return;
 			}
 	
-			std::for_each(std::execution::par_unseq, chunk.begin(), chunk.end(), [](T& value)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ chunk.begin(), chunk.end(), [](T& value)
 			{
 				value += 1;
 			}

@@ -243,7 +243,7 @@ namespace NAMESPACE_COMPRESSED_IMAGE
 				else
 				{
 					std::fill(
-						std::execution::par_unseq,
+						COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ
 						buffer.begin(),
 						buffer.end(),
 						std::get<T>(this->m_Chunks[index].value)

@@ -22,7 +22,7 @@ TEST_CASE("compressed::ranges::zip sequenced loops")
 			std::vector<T> data_c(25, static_cast<T>(75));
 
 			auto gen = compressed::ranges::zip(data_a, data_b, data_c);
-			std::for_each(std::execution::seq, gen.begin(), gen.end(), [](auto vals)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL gen.begin(), gen.end(), [](auto vals)
 				{
 					auto& [a, b, c] = vals;
 					CHECK(a == static_cast<T>(25));
@@ -43,7 +43,7 @@ TEST_CASE("compressed::ranges::zip parallel loops")
 			std::vector<T> data_c(25, static_cast<T>(75));
 
 			auto gen = compressed::ranges::zip(data_a, data_b, data_c);
-			std::for_each(std::execution::par_unseq, gen.begin(), gen.end(), [](auto vals)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ gen.begin(), gen.end(), [](auto vals)
 				{
 					auto& [a, b, c] = vals;
 					CHECK(a == static_cast<T>(25));
@@ -88,7 +88,7 @@ TEST_CASE("compressed::ranges::zip serial mismatched sizes")
 
 			auto gen = compressed::ranges::zip(data_a, data_b, data_c);
 			CHECK(gen.size() == 25);
-			std::for_each(std::execution::seq, gen.begin(), gen.end(), [](auto vals)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL gen.begin(), gen.end(), [](auto vals)
 				{
 					auto& [a, b, c] = vals;
 					CHECK(a == static_cast<T>(25));
@@ -112,7 +112,7 @@ TEST_CASE("compressed::ranges::zip parallel mismatched sizes")
 
 			auto gen = compressed::ranges::zip(data_a, data_b, data_c);
 			CHECK(gen.size() == 25);
-			std::for_each(std::execution::par_unseq, gen.begin(), gen.end(), [](auto vals)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ gen.begin(), gen.end(), [](auto vals)
 				{
 					auto& [a, b, c] = vals;
 					CHECK(a == static_cast<T>(25));
@@ -160,7 +160,7 @@ TEST_CASE("compressed::ranges::zip parallel mismatched sizes modify")
 
 			auto gen = compressed::ranges::zip(data_a, data_b, data_c);
 			CHECK(gen.size() == 25);
-			std::for_each(std::execution::par_unseq, gen.begin(), gen.end(), [](auto vals)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ gen.begin(), gen.end(), [](auto vals)
 				{
 					auto& [a, b, c] = vals;
 					CHECK(a == static_cast<T>(25));
@@ -173,7 +173,7 @@ TEST_CASE("compressed::ranges::zip parallel mismatched sizes modify")
 				});
 
 			auto gen_2 = compressed::ranges::zip(data_a, data_b, data_c);
-			std::for_each(std::execution::par_unseq, gen_2.begin(), gen_2.end(), [](auto vals)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ gen_2.begin(), gen_2.end(), [](auto vals)
 				{
 					auto& [a, b, c] = vals;
 					CHECK(a == static_cast<T>(75));
@@ -197,7 +197,7 @@ TEST_CASE("compressed::ranges::zip serial mismatched sizes modify")
 
 			auto gen = compressed::ranges::zip(data_a, data_b, data_c);
 			CHECK(gen.size() == 25);
-			std::for_each(std::execution::seq, gen.begin(), gen.end(), [](auto vals)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL gen.begin(), gen.end(), [](auto vals)
 				{
 					auto& [a, b, c] = vals;
 					CHECK(a == static_cast<T>(25));
@@ -210,7 +210,7 @@ TEST_CASE("compressed::ranges::zip serial mismatched sizes modify")
 				});
 
 			auto gen_2 = compressed::ranges::zip(data_a, data_b, data_c);
-			std::for_each(std::execution::seq, gen_2.begin(), gen_2.end(), [](auto vals)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL gen_2.begin(), gen_2.end(), [](auto vals)
 				{
 					auto& [a, b, c] = vals;
 					CHECK(a == static_cast<T>(75));

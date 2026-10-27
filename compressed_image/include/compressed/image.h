@@ -430,7 +430,7 @@ namespace NAMESPACE_COMPRESSED_IMAGE
 		///				return;
 		///			}
 		/// 
-		///			std::for_each(std::execution::par_unseq, chunk.begin(), chunk.end(), [](T& value)
+		///			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ chunk.begin(), chunk.end(), [](T& value)
 		///			{
 		///				value += 1;
 		///			}
@@ -635,7 +635,7 @@ namespace NAMESPACE_COMPRESSED_IMAGE
 		///				return;
 		///			}
 		///		
-		///			std::for_each(std::execution::par_unseq, chunk.begin(), chunk.end(), [](T& value)
+		///			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ chunk.begin(), chunk.end(), [](T& value)
 		///			{
 		///				value += 1;
 		///			}
@@ -832,7 +832,7 @@ namespace NAMESPACE_COMPRESSED_IMAGE
 		///				return;
 		///			}
 		/// 
-		///			std::for_each(std::execution::par_unseq, chunk.begin(), chunk.end(), [](T& value)
+		///			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ chunk.begin(), chunk.end(), [](T& value)
 		///			{
 		///				value += 1;
 		///			}
@@ -1554,7 +1554,7 @@ namespace NAMESPACE_COMPRESSED_IMAGE
 			// or compressed from.
 			util::default_init_vector<T> interleaved_buffer(max_chunk_size / sizeof(T));
 			std::vector<util::default_init_vector<T>> deinterleaved_buffer(max_num_channels);
-			std::for_each(std::execution::par_unseq, deinterleaved_buffer.begin(), deinterleaved_buffer.end(), [&](auto& buffer)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ deinterleaved_buffer.begin(), deinterleaved_buffer.end(), [&](auto& buffer)
 				{
 					buffer.resize(chunk_size_aligned / sizeof(T));
 				});

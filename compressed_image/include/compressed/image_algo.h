@@ -53,7 +53,7 @@ namespace NAMESPACE_COMPRESSED_IMAGE
 			}
 
 			auto indices = std::views::iota(static_cast<std::size_t>(0), spans.front().size());
-			std::for_each(std::execution::par_unseq, indices.begin(), indices.end(), [&buffer, &spans](auto idx)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ indices.begin(), indices.end(), [&buffer, &spans](auto idx)
 				{
 					const std::size_t start_idx = spans.size() * idx;
 					for (size_t i = 0; i < spans.size(); ++i)
@@ -100,7 +100,7 @@ namespace NAMESPACE_COMPRESSED_IMAGE
 			// Perform deinterleaving
 			const std::size_t spans_size = channel_spans.size();
 			auto indices = std::views::iota(static_cast<std::size_t>(0), channel_spans.front().size());
-			std::for_each(std::execution::par_unseq, indices.begin(), indices.end(), [&](auto idx)
+			std::for_each(COMPRESSED_IMAGE_EXEC_PARALLEL_UNSEQ indices.begin(), indices.end(), [&](auto idx)
 				{
 					const size_t interleaved_base_idx = idx * spans_size;
 					for (size_t i = 0; i < spans_size; ++i)
